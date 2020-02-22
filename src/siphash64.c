@@ -46,7 +46,7 @@ const	uint8_t*	end	= data + len - (len % sizeof(uint64_t));
 const	int		left	= len & 7;
 	uint64_t	result = ((uint64_t)len) << 56;
 	
-// keys[] are presented in host byte so order convert to LE
+// keys[] are presented in host byte order so on BE host convert to LE
 # if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
 	key0	= __builtin_bswap64 (key0);
 	key1	= __builtin_bswap64 (key1);
@@ -59,9 +59,9 @@ const	int		left	= len & 7;
 
 	for (; data != end; data += sizeof(uint64_t)) {
 
-// This is the only endian bit.
-// Assumes the first byte in "data" is the lsb in "m" etc 
-//
+// Siphash assumes the first byte in "data" is the lsb in "m" etc 
+// True on LE so need to bswap on BE. This also applies to the keys.
+		
 		uint64_t	m	= *(uint64_t*)(data);
 
 # if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
@@ -75,7 +75,7 @@ const	int		left	= len & 7;
 
 		v0	^= m;
 	}
-
+// This construct the LE uint64_t from the residual bytes.
 	switch (left) {
 	case 7:
 		result	|= ((uint64_t)data[6]) << 48;	// (left-1)*8

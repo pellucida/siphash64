@@ -1,10 +1,11 @@
 ## siphash64
 
-64 bit only version of siphash extracted from the reference implementation of SipHash.
+Simplified interface to 64 bit only version of siphash extracted from
+the reference implementation of _SipHash_.
 
 C language reference implementation (https://github.com/veorq/SipHash)
 
-SipHash was designed by [Jean-Philippe Aumasson](https://131002.net) and
+_SipHash_ was designed by [Jean-Philippe Aumasson](https://131002.net) and
 [Daniel J. Bernstein](http://cr.yp.to). 
 
 ## Usage
@@ -33,12 +34,12 @@ cd src
 Make
 ```
 
-produces siphash64.o and siphash64_test which verifies the 64 test vectors
+produces _siphash64.o_ and _siphash64_test_ which verifies the 64 test vectors
 extracted the reference implentation
 
-The code can be adapted to implement SipHash-*c*-*d*, the version of SipHash
-with *c* compression rounds and *d* finalization rounds, by redefining the `cROUNDS`
-or `dROUNDS` enums in `strhash64.h` before recompiling.  
+The code can be adapted to implement _SipHash-*c*-*d*_, the version of SipHash
+with *c* compression rounds and *d* finalization rounds, by redefining the __cROUNDS__
+or __dROUNDS__ enums in _strhash64.h_ before recompiling.  
 
 Obviously, if the number of rounds is modified then the test vectors
 won't verify.

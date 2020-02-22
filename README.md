@@ -46,7 +46,7 @@ won't verify.
 
 ## Intellectual property
 
-Exactly as the original authors released the reference implementation.
+Exactly the same as when the original authors released the reference implementation.
 
 ```
 "The SipHash reference code is released under
@@ -58,6 +58,7 @@ SipHash, and we aren't planning to apply for any.
 ```
 ## License
 
+See above 
 [CC0 license](https://creativecommons.org/publicdomain/zero/1.0/)
 
 ## References

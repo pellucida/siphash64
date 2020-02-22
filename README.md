@@ -15,6 +15,16 @@ SipHash was designed by [Jean-Philippe Aumasson](https://131002.net) and
 # include	"siphash64.h"
 uint64_t	siphash64 (uint8_t* data, size_t len, uint64_t keys[2]);
 ```
+### Example
+```
+  char  data []   = "An example string to hash";
+  uint64_t  keys  = {  0xa0b0c0d0e0f09080, 0xabaddeadbeefcafe };
+  uint64_t  hash  = siphash64 (data, sizeof(data)-1, keys);
+  printf ("0x%lx\n", hash);
+  
+  0xd52650118133d393
+```
+
 
 ## Building
 
@@ -38,12 +48,16 @@ won't verify.
 Exactly as the original authors released the reference implementation.
 
 ```
-"The SipHash reference code is released under [CC0 license](https://creativecommons.org/publicdomain/zero/1.0/),
+"The SipHash reference code is released under
+[CC0 license](https://creativecommons.org/publicdomain/zero/1.0/),
 a public domain-like licence.
 
 "We aren't aware of any patents or patent applications relevant to
 SipHash, and we aren't planning to apply for any.
 ```
+## License
+
+[CC0 license](https://creativecommons.org/publicdomain/zero/1.0/)
 
 ## References
 

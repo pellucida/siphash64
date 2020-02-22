@@ -1,13 +1,12 @@
-# siphash64
+## siphash64
 
-64 bit siphash extracted from the reference implementation of SipHash.
+64 bit only version of siphash extracted from the reference implementation of SipHash.
 
-[C language reference implementation](https://github.com/veorq/SipHash)
+C language reference implementation (https://github.com/veorq/SipHash)
 
 SipHash was designed by [Jean-Philippe Aumasson](https://131002.net) and
 [Daniel J. Bernstein](http://cr.yp.to). 
 
-```
 ## Usage
 
 ```
@@ -23,6 +22,7 @@ uint64_t	siphash64 (uint8_t* data, size_t len, uint64_t keys[2]);
 cd src
 Make
 ```
+
 produces siphash64.o and siphash64_test which verifies the 64 test vectors
 extracted the reference implentation
 
@@ -36,6 +36,7 @@ won't verify.
 ## Intellectual property
 
 Exactly as the original authors released the reference implementation.
+
 ```
 "The SipHash reference code is released under [CC0
 license](https://creativecommons.org/publicdomain/zero/1.0/), a public

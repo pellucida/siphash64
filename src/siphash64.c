@@ -34,30 +34,30 @@
 
 
 uint64_t	siphash64 (uint8_t* data, size_t len, uint64_t key[2]) {
-	uint64_t	v0	= (0x736f6d6570736575);
-	uint64_t	v1	= (0x646f72616e646f6d);
-	uint64_t	v2	= (0x6c7967656e657261);
-	uint64_t	v3	= (0x7465646279746573);
+	uint64_t	v0	= 0x736f6d6570736575;
+	uint64_t	v1	= 0x646f72616e646f6d;
+	uint64_t	v2	= 0x6c7967656e657261;
+	uint64_t	v3	= 0x7465646279746573;
 	int i;
 
-	uint64_t	key0	= key[0];
-	uint64_t	key1	= key[1];
-
-# if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
-		key0	= __builtin_bswap64 (key0);
-		key1	= __builtin_bswap64 (key1);
-# endif
-
+	uint64_t	key0	= key [0];
+	uint64_t	key1	= key [1];
 const	uint8_t*	end	= data + len - (len % sizeof(uint64_t));
-const	int	left	= len & 7;
+const	int		left	= len & 7;
 	uint64_t	result = ((uint64_t)len) << 56;
+	
+// keys[] are presented in host byte so order convert to LE
+# if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+	key0	= __builtin_bswap64 (key0);
+	key1	= __builtin_bswap64 (key1);
+# endif
 
 	v3	^= key1;
 	v2	^= key0;
 	v1	^= key1;
 	v0	^= key0;
 
-	for (; data != end; data += 8) {
+	for (; data != end; data += sizeof(uint64_t)) {
 
 // This is the only endian bit.
 // Assumes the first byte in "data" is the lsb in "m" etc 

@@ -4,8 +4,16 @@
 
 # include	<stdint.h>
 # include	<stdlib.h>
+# include	<string.h>
 
 # include	"siphash64.h"
+
+// My use ensured the hashed data was on 8 byte (word)
+// boundaries (malloc'd)
+// x86 will do unaligned word fetches (slow?)
+// but other architectures raise an exceptions (SIGBUS?)
+
+# define	UNALIGNED_WORD_FETCHES_ARE_A_PROBLEM	1
 
 // Note these macros all operate on 64 bit words 
 // so no endianess 
@@ -61,8 +69,13 @@ const	int		left	= len & 7;
 
 // Siphash assumes the first byte in "data" is the lsb in "m" etc 
 // True on LE so need to bswap on BE. This also applies to the keys.
-		
+
+# if	!defined (UNALIGNED_WORD_FETCHES_ARE_A_PROBLEM)
 		uint64_t	m	= *(uint64_t*)(data);
+# else
+		uint64_t	m;
+		memcpy (&m, data, sizeof(m));
+# endif
 
 # if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
 		m	= __builtin_bswap64 (m);

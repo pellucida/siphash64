@@ -19,7 +19,7 @@ uint64_t	siphash64 (uint8_t* data, size_t len, uint64_t keys[2]);
 ### Example
 ```
   char  data []   = "An example string to hash";
-  uint64_t  keys  = {  0xa0b0c0d0e0f09080, 0xabaddeadbeefcafe };
+  uint64_t  keys[2]  = {  0xa0b0c0d0e0f09080, 0xabaddeadbeefcafe };
   uint64_t  hash  = siphash64 (data, sizeof(data)-1, keys);
   printf ("0x%lx\n", hash);
   
